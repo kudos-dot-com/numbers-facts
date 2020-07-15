@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background:url(image.png) no-repeat /*linear-gradient(45deg,#e67e22,#f39c12) */;
+            background-size: cover;
+        }
+        #body{
+            position: absolute;
+            height: 100%;
+            width:100%;
+            background-color: #0007;
+            box-shadow: inset 30px 30px 50px  #000;
+        }
+        #box{
+            border: 1px solid #fff;
+            height: 300px;
+            width:500px;
+            background:linear-gradient(45deg,#e67e22,#f39c12) ;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            box-shadow: 15px 15px 15px #0005;
+            border-radius: 10px;
+        }
+        #box:after{
+            width: 50%;
+            height: 100%;
+            background-color: red;
+
+        }
+        label{
+            font-size: 20px;
+            color:#fff;
+            text-transform: capitalize;
+            margin: 15px;
+        }
+        input{
+            margin:5px;
+            color:#fff;
+            height: 25px;
+            width:150px;
+            border:none;
+            outline: none;
+            background-color: transparent;
+            
+        }
+        .text{
+            position: absolute;
+            top:50%;
+            transform: translateY(-50%);
+            
+        }
+        .textbox{
+            border-bottom: 1px solid white;
+            width:100%;
+            margin-left: 10px;
+        }
+        button{
+            height: 25px;
+            width: 80px;
+            margin: 15px 10px;
+            background-color: red;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            color: #fff;
+        }
+        #after{
+            position: absolute;
+            height: 100%;
+            width:50%;
+            right: 0;
+            background-color: #fff;
+            font-size: 25px;
+        }
+        #after h1{
+            font-size: 25px;
+            text-align: center;
+            text-transform: capitalize;
+            color:red;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        .header{
+            display: flex;
+        }
+        .header h1{
+            font-size: 25px;
+            margin: 10px 5px;
+            color: #fff;
+            text-transform: capitalize;
+            border-bottom: 4px solid #fff;
+            padding-bottom: 5px;
+           
+        }
+        #after1{
+            position: absolute;
+            width: 200px;
+            top:20%;
+            left:50%;
+            transform: translateX(-50%);
+            height:200px;
+            background-color: #e67e22;
+            font-size: medium;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border-radius: 50%;
+            text-overflow: clip;
+            visibility: hidden;
+        }
+        #after2{
+        position: absolute;
+        top:55%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        height:100px;
+        width:90%;
+        color:#fff;
+        }
+    </style>
+</head>
+<body>
+<div id="body"></div>    
+<div id="box">
+    <div id="after">
+        <h1>did you know</h1>
+        <div id="after1">
+            <div id="after2"></div>
+        </div>
+    </div>
+    <div class="header">
+        <h1>numbers trivia</h1><img src="images1.jpg" height="50px" width="50px" alt="">   
+    </div>
+    <div class="text">
+    
+    <label for="name" >number<div class="textbox"><input type="text" id="input" placeholder="Enter Your Number Here">
+    </div></label>
+    <button id="submit" type="submit">Generate</button>
+    <button id="reset"type="reset">reset</button>
+</div>
+   
+</div>
+<script>
+var res=document.getElementById("submit").addEventListener('click',()=>{
+//console.log(1);
+var number=document.getElementById("input");
+console.log(number.value);
+function load()
+{//document.getElementById("after").innerHTML='<p>'+'did you know'+'</p>'
+
+var xhr=new XMLHttpRequest();
+xhr.open('GET','http://numbersapi.com/'+number.value,true );
+
+xhr.onload=function(){
+    if(this.status==200){
+        //console.log(this.responseText);
+        document.getElementById("after1").style.visibility="visible";
+        document.getElementById("after2").innerHTML='<p>'+this.responseText+'</p>'
+        document.getElementById("after2").style.textAlign="center";
+    }
+}
+xhr.send();
+}
+load();
+}
+);
+var reset=document.getElementById("reset").addEventListener('click',()=>{
+    document.getElementById("after1").style.visibility="hidden";
+
+    
+});
+</script>
+</body>
